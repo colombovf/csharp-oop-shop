@@ -21,12 +21,14 @@ namespace csharp_oop_shop
         //Costruttori con parametri
         public Prodotto(string name, string description, int price)
         {
-            this.codice = setCodice();
+            this.codice = CalcolaCodice();
             this.nome = name;
             this.descrizione = description;
             this.prezzo = price;
             this.iva = getIva();
         }
+
+
         //Getter
         public int getCodice()
         {
@@ -43,7 +45,7 @@ namespace csharp_oop_shop
             return descrizione;
         }
 
-        public int getPrezzo()
+        public int getPrezzoSenzaIva()
         {
             return prezzo - iva;
         }
@@ -54,18 +56,13 @@ namespace csharp_oop_shop
         }
 
         public int getIva()
-        {
-            
-            return CalcoloIva(prezzo);
+        { 
+           return CalcoloIva(prezzo);
         }
+
+
 
         //Setter
-
-        public int setCodice()
-        {
-            Random r = new Random();
-           return  r.Next(0, 9999999);
-        }
         public void setNome(string name)
         {
             nome = name;
@@ -87,16 +84,25 @@ namespace csharp_oop_shop
             iva = CalcoloIva(price);
             prezzo = CalcoloPrezzoConIva(price);
         }
-        //Funzioni
 
-        int CalcoloIva(int price)
+
+
+        //Metodi
+
+        private int CalcolaCodice()
+        {
+            Random r = new Random();
+            return r.Next(0, 9999999);
+        }
+
+        private int CalcoloIva(int price)
         {
             return (price * 20) / 100;
         }
 
-        int CalcoloPrezzoConIva(int price)
+        private int CalcoloPrezzoConIva(int price)
         {
-            return price - (price * 20 / 100);
+            return price - (price * 20 /100);
         }
     }
 }
